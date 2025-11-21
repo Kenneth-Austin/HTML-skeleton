@@ -7,15 +7,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1 class="site-title">Kenny's Mini-Site</h1>
-  </header>
-<ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="project.html">Projects</a></li>
-    <li><a href="components.html">Components</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
+  <header class="wrap site-header">
+    <h1 class="site-title">My Mini-Site</h1>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+      ☰ Menu
+    </button>
+    <nav id="site-nav" class="nav" aria-label="Primary">
+      <a aria-current="page" href="index.html">Home</a>
+      <a aria-current="page" href="project.html">Projects</a>
+      <a aria-current="page" href="components.html">Components</a>
+    </nav>
+  </header>  
   <main id="main">
     <section aria-labelledby="proj-intro">
       <h2 id="proj-intro">Projects</h2>
@@ -26,16 +28,20 @@
       <h2 id="proj-list">Project List</h2>
 
       <article class="card">
-        <img src="Screenshot.png">
-        <h3 class="card__title">Mini-site</h3>
-        <p class="card__summary"> Multi tab final draft wireframe</p>
+        <img src="Screenshot.jpg"
+        loading="lazy"
+        alt="Landing Page">
+        <h3 class="card__title">Landing Page</h3>
+        <p class="card__summary">The first part of a website.</p>
         <a class="btn btn--sm" href="#">Details</a>
       </article>
 
       <article class="card">
-        <img src="Screenshot1.png">
-        <h3 class="card__title">WireFrame</h3>
-        <p class="card__summary"> Frame of the site</p>
+        <img src="MC.jpg" width="1200" height="675"
+        loading="lazy"
+        alt="Moonlight Café">
+        <h3 class="card__title">Moonlight Café</h3>
+        <p class="card__summary">Make a café by code</p>
         <a class="btn btn--sm" href="#">Details</a>
       </article>
     </section>
@@ -44,5 +50,31 @@
   <footer>
     <small>© 2025 Kenny Austin</small>
   </footer>
+  <script>
+    const btn = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('site-nav');
+  
+    function setOpen(open){
+      // Update the attribute for assistive tech
+      btn.setAttribute('aria-expanded', String(open));
+      // Toggle the class that shows/hides the nav on mobile
+      nav.classList.toggle('is-open', open);
+    }
+  
+    // Click to open/close
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+  
+    // Escape closes the menu and returns focus to the button
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  </script>
+  
 </body>
 </html>
