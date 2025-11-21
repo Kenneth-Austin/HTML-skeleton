@@ -3,32 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kenny's Mini-Site — Home</title>
+  <title>Kenny's Mini-Site — Components</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
   <body>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="project.html">Projects</a></li>
-      <li><a href="components.html">Components</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-
-    <header class="wrap">
-    <h1 class="site-title">Kenny's Mini-Site</h1>
-  </header>
+    <header class="wrap site-header">
+      <h1 class="site-title">My Mini-Site</h1>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+        ☰ Menu
+      </button>
+    
+      
+      <nav id="site-nav" class="nav" aria-label="Primary">
+        <a aria-current="page" href="index.html">Home</a>
+        <a aria-current="page" href="project.html">Projects</a>
+        <a aria-current="page" href="components.html">Components</a>
+      </nav>
+    </header>    
   <section>
     <h2>Card</h2>
     <article class="card">
-      <img src="https://picsum.photos/800/450" alt="Placeholder project screenshot">
-      <h3 class="card__title"><a href="#">Recreate Webpage</a></h3>
+      <img src="https://picsum.photos/800/450"
+      loading="lazy" alt="Placeholder project screenshot">
+      <h3 class="card__title">Recreate Webpage</h3>
       <p class="card__summary">Redo an entire website by code.</p>
-      <a class="btn btn--sm" href="#">View project</a>
+      <a class="btn btn--sm" href="#">Details</a>
     </article>
   </section>
   <footer>
     <small>© 2025 Kenny Austin</small>
   </footer>
+  <script>
+    const btn = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('site-nav');
+  
+    function setOpen(open){
+      // Update the attribute for assistive tech
+      btn.setAttribute('aria-expanded', String(open));
+      // Toggle the class that shows/hides the nav on mobile
+      nav.classList.toggle('is-open', open);
+    }
+  
+    // Click to open/close
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+  
+    // Escape closes the menu and returns focus to the button
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  </script>
+    </div>
+  </div>
   </body>
 </html>
