@@ -7,16 +7,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="project.html">Projects</a></li>
-    <li><a href="components.html">Components</a></li>
-    <li><a href="#about">About</a></li>
-  </ul>
-  <header>
-    <h1 class="site-title">Kenny's Mini-Site</h1>
+  <header class="wrap site-header">
+    <h1 class="site-title">My Mini-Site</h1>
+  
+    
+    <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+      ☰ Menu
+    </button>
+  
+    
+    <nav id="site-nav" class="nav" aria-label="Primary">
+      <a aria-current="page" href="index.html">Home</a>
+      <a aria-current="page" href="project.html">Projects</a>
+      <a aria-current="page" href="components.html">Components</a>
+    </nav>
   </header>
-
   <main id="main" class="wrap">
     <section aria-labelledby="hero-title">
       <h2 id="hero-title">Welcome</h2>
@@ -33,5 +38,30 @@
   <footer>
     <small>© 2025 Kenny Austin</small>
   </footer>
+  <script>
+    const btn = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('site-nav');
+  
+    function setOpen(open){
+      // Update the attribute for assistive tech
+      btn.setAttribute('aria-expanded', String(open));
+      // Toggle the class that shows/hides the nav on mobile
+      nav.classList.toggle('is-open', open);
+    }
+  
+    // Click to open/close
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+    });
+  
+    // Escape closes the menu and returns focus to the button
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  </script>  
 </body>
 </html>
